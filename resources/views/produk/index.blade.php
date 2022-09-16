@@ -26,21 +26,24 @@
 	</style>
 </head>
 <body>
-	<table align="center" border="2">
-		<tr>
-            <th>Nama Produk</th>
-            <th>Deskripsi produk</th>
-            <th>Gambar Produk</th>
-        </tr>
-        @foreach($data as $list)
-        <tr>
-        	<td>{{$list->nama_produk}}</td>
-        	<td>{{$list->deskripsi}}</td>
-        	<td><img class="img-preview img-fluid" src="{{ asset('storage/produk' . $list->gambar) }}" 
-            style="max-width: 250px;"></td>
-        </tr>
-        @endforeach
-	</table>
+    <div class="container">
+        <a href="{{route('create')}}" class="btn btn-secondary mt-3">Tambah Data</a>
+        <table align="center" border="2">
+            <tr>
+                <th>Nama Produk</th>
+                <th>Deskripsi produk</th>
+                <th>Gambar Produk</th>
+            </tr>
+            @foreach($data as $list)
+            <tr>
+                <td>{{$list->nama_produk}}</td>
+                <td>{{$list->deskripsi}}</td>
+                <td><img class="img-preview img-fluid" src="{{ url('/produk/'.$list->gambar) }}" 
+                style="max-width: 100px;"></td>
+            </tr>
+            @endforeach
+        </table>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 </body>
 </html>

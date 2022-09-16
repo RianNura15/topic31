@@ -20,18 +20,23 @@ class ProdukController extends Controller
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'nama_produk' => 'required',
+        $this->validate($request, [
+			'nama_produk' => 'required',
             'deskripsi' => 'required',
-            'gambar' => 'image|mimes:jpg,jpeg,png',
-        ]);
+			'gambar' => 'required|image|mimes:jpeg,png,jpg',
+		]);
+		$file = $request->file('gambar');
+ 
+		$nama_file = time()."_".$file->getClientOriginalName();
+		$tujuan_upload = 'produk';
+		$file->move($tujuan_upload,$nama_file);
+ 
+		Produk::insert([
+			'nama_produk' => $request->nama_produk,
+            'deskripsi' => $request->deskripsi,
+			'gambar' => $nama_file
+		]);
 
-        if($request->file('gambar')){
-            $validatedData['gambar'] = $request->file('gambar')->store('public/produk');
-        }
-
-        Produk::insert($validatedData);
-
-        return redirect('/produk');
+        return redirect('/produk/tampil');
     }
 }

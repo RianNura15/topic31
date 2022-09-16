@@ -7,6 +7,7 @@
 </head>
 <body>
     <div class="container">
+    	<a href="{{route('produkindex')}}" class="btn btn-secondary mt-3">Kembali</a>
         <h2> Tambahkan Produk </h2>
         <form method="post" action="{{route('tambahproduk')}}" enctype="multipart/form-data">
         	@csrf

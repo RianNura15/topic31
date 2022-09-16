@@ -18,6 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/produk', [ProdukController::class, 'index']);
-Route::get('/produk/create', [ProdukController::class, 'create']);
-Route::post('/tambahproduk', [ProdukController::class, 'store'])->name('tambahproduk');
+Route::prefix('produk')->group(function () {
+    Route::get('/tampil', [ProdukController::class, 'index'])->name('produkindex');
+    Route::get('/create', [ProdukController::class, 'create'])->name('create');
+    Route::post('/tambah', [ProdukController::class, 'store'])->name('tambahproduk');
+});
