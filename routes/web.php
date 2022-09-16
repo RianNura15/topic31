@@ -20,4 +20,4 @@ Route::get('/', function () {
 
 Route::get('/produk', [ProdukController::class, 'index']);
 Route::get('/produk/create', [ProdukController::class, 'create']);
-Route::post('/produk', [ProdukController::class, 'store']);
+Route::post('/tambahproduk', [ProdukController::class, 'store'])->name('tambahproduk');

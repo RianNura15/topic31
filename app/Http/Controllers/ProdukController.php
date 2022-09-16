@@ -9,7 +9,8 @@ class ProdukController extends Controller
 {
     public function index()
     {
-
+        $data = Produk::all();
+        return view('produk.index', compact('data'));
     }
 
     public function create()
@@ -17,12 +18,20 @@ class ProdukController extends Controller
         return view('produk.create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        $produk = new Produk;
-        $produk->nama_produk = request('namaproduk');
-        $produk->deskripsi = request('deskripsi');
-        $produk->gambar = request()->file('gambar')->store('public/images');
-        $produk->save();
+        $validatedData = $request->validate([
+            'nama_produk' => 'required',
+            'deskripsi' => 'required',
+            'gambar' => 'image|mimes:jpg,jpeg,png',
+        ]);
+
+        if($request->file('gambar')){
+            $validatedData['gambar'] = $request->file('gambar')->store('public/produk');
+        }
+
+        Produk::insert($validatedData);
+
+        return redirect('/produk');
     }
 }

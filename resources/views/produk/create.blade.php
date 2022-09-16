@@ -8,10 +8,10 @@
 <body>
     <div class="container">
         <h2> Tambahkan Produk </h2>
-        <form method="post" action="/produk" enctype="multipart/form-data">
+        <form method="post" action="{{route('tambahproduk')}}" enctype="multipart/form-data">
         	@csrf
         	<div class="form-floating mb-3">
-			  <input type="text" class="form-control" name="namaproduk" id="namaproduk" placeholder="Nama Produk">
+			  <input type="text" class="form-control" name="nama_produk" id="nama_produk" placeholder="Nama Produk">
 			  <label for="floatingInput">Nama Produk</label>
 			</div>
 			<div class="form-floating mb-3">
